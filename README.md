@@ -27,7 +27,7 @@ Edit file .env, contoh:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=kasir
+DB_DATABASE=asrama
 DB_USERNAME=root
 DB_PASSWORD=
 ```
