@@ -69,3 +69,8 @@ npm run dev
 ```
 npm run build
 ```
+
+## Login Admin
+
+-   username : admin
+-   password : admin
