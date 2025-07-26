@@ -3,8 +3,8 @@
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/ilhanmanzis/pos.git
-cd pos
+git clone https://github.com/ilhanmanzis/presensi_asrama.git
+cd presensi_asrama
 
 ```
 
@@ -69,7 +69,3 @@ npm run dev
 ```
 npm run build
 ```
-
-## ERD
-
-![ERD](screenshots/gudang.jpg)
