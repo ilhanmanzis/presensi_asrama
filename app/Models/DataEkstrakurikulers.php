@@ -21,4 +21,17 @@ class DataEkstrakurikulers extends Model
     {
         return $this->hasMany(PresensiEkstrakurikulers::class, 'id_data_ekstrakurikuler', 'id_data_ekstrakurikuler');
     }
+    public function scopeTanggal($query, $filters)
+    {
+
+        if (isset($filters['tanggal']) && $filters['tanggal']) {
+            $query->where('tanggal', $filters['tanggal']);
+        }
+
+        if (isset($filters['ekstrakurikuler']) && $filters['ekstrakurikuler']) {
+            $query->where('id_ekstrakurikuler', $filters['ekstrakurikuler']);
+        }
+
+        return $query;
+    }
 }

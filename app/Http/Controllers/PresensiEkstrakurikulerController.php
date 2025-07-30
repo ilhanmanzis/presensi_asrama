@@ -21,7 +21,8 @@ class PresensiEkstrakurikulerController extends Controller
             'page' => 'Ekstrakurikuler',
             'title' => 'Data Ekstrakurikuler ',
             // Assuming you have a model to fetch data
-            'ekstrakurikulers' => DataEkstrakurikulers::with(['presensi', 'ekstrakurikuler'])->orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
+            'ekstrakurikulers' => DataEkstrakurikulers::tanggal(request()->only(['tanggal', 'ekstrakurikuler']))->with(['presensi', 'ekstrakurikuler'])->orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
+            'datas' => Ekstrakurikulers::all()
         ];
         return view('pembina.ekstrakurikuler.index', $data);
     }

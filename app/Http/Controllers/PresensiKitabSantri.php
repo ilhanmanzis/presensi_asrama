@@ -51,12 +51,12 @@ class PresensiKitabSantri extends Controller
     {
         $request->validate([
             'tanggal' => 'required',
-            'kegiatan' => 'required',
+            // 'kegiatan' => 'required',
         ]);
         $kitabSantri = KitabSantris::findOrFail($id);
         $dataKitabSantri = $kitabSantri->dataKitabSantris()->create([
             'tanggal' => $request->tanggal,
-            'kegiatan' => $request->kegiatan,
+            'kegiatan' => $request->kegiatan ?? null,
         ]);
         foreach ($request->id_santri as $index => $idSantri) {
             $dataKitabSantri->presensi()->create([
@@ -75,7 +75,7 @@ class PresensiKitabSantri extends Controller
     public function show(string $id)
     {
         $dataKitabSantri = KitabSantris::findOrFail($id);
-        $kitabs = $dataKitabSantri->dataKitabSantris()->with('presensi')->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        $kitabs = $dataKitabSantri->dataKitabSantris()->tanggal(request()->only(['tanggal']))->with('presensi')->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
         $data = [
             'selected' => 'Kitab Santri',
             'page' => 'Kitab Santri',
@@ -118,13 +118,13 @@ class PresensiKitabSantri extends Controller
     {
         $request->validate([
             'tanggal' => 'required',
-            'kegiatan' => 'required',
+            // 'kegiatan' => 'required',
         ]);
         $dataKitabSantri = KitabSantris::findOrFail($kitabId);
         $kitab = $dataKitabSantri->dataKitabSantris()->where('id_data_kitab_santri', $id)->firstOrFail();
         $kitab->update([
             'tanggal' => $request->tanggal,
-            'kegiatan' => $request->kegiatan,
+            'kegiatan' => $request->kegiatan ?? null,
         ]);
 
         foreach ($kitab->presensi as $presensi) {

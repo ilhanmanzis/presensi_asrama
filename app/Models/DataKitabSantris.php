@@ -20,4 +20,13 @@ class DataKitabSantris extends Model
     {
         return $this->belongsTo(KitabSantris::class, 'id_kitab_santri', 'id_kitab_santri');
     }
+    public function scopeTanggal($query, $filters)
+    {
+
+        if (isset($filters['tanggal']) && $filters['tanggal']) {
+            $query->where('tanggal', $filters['tanggal']);
+        }
+
+        return $query;
+    }
 }

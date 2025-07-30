@@ -222,7 +222,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
 
 
 
-Route::middleware(['auth', 'role:admin,finance,gudang,pembina'])->group(function () {
+Route::middleware(['auth', 'role:admin,pembina'])->group(function () {
     //edit akun
     Route::get('/users/edit/{id}', [ManajemenUser::class, 'edit'])->name('users.edit');
     Route::put('/users/edit/{id}', [ManajemenUser::class, 'updateProfile'])->name('users.update.profile');
@@ -230,23 +230,11 @@ Route::middleware(['auth', 'role:admin,finance,gudang,pembina'])->group(function
 
     //laporan
     Route::get('/laporan', [Laporan::class, 'index'])->name('laporan');
-    Route::post('/laporan/penagihan', [Laporan::class, 'penagihan'])->name('laporan.penagihan');
-    Route::get('/laporan/penagihan/pdf', [Laporan::class, 'penagihanPdf'])->name('laporan.penagihan.pdf');
-    Route::get('/laporan/penagihan/excel', [Laporan::class, 'penagihanExcel'])->name('laporan.penagihan.excel');
-    Route::post('/laporan/transaksi', [Laporan::class, 'transaksi'])->name('laporan.transaksi');
-    Route::get('/laporan/transaksi/pdf', [Laporan::class, 'transaksiPdf'])->name('laporan.transaksi.pdf');
-    Route::get('/laporan/transaksi/excel', [Laporan::class, 'transaksiExcel'])->name('laporan.transaksi.excel');
-    Route::post('/laporan/pengeluaran', [Laporan::class, 'pengeluaran'])->name('laporan.pengeluaran');
-    Route::get('/laporan/pengeluaran/pdf', [Laporan::class, 'pengeluaranPdf'])->name('laporan.pengeluaran.pdf');
-    Route::get('/laporan/pengeluaran/excel', [Laporan::class, 'pengeluaranExcel'])->name('laporan.pengeluaran.excel');
-    Route::get('/laporan/produk/pdf', [Laporan::class, 'produkPdf'])->name('laporan.produk.pdf');
-    Route::get('/laporan/produk/excel', [Laporan::class, 'produkExcel'])->name('laporan.produk.excel');
-    Route::post('/laporan/retur', [Laporan::class, 'retur'])->name('laporan.retur');
-    Route::post('/laporan/margin', [Laporan::class, 'margin'])->name('laporan.margin');
-    Route::get('/laporan/margin/pdf', [Laporan::class, 'marginPdf'])->name('laporan.margin.pdf');
-    Route::get('/laporan/margin/excel', [Laporan::class, 'marginExcel'])->name('laporan.margin.excel');
-
-    Route::post('/laporan/diterima', [Laporan::class, 'diterima'])->name('laporan.diterima');
+    Route::post('/laporan/jamaah', [Laporan::class, 'jamaah'])->name('laporan.jamaah');
+    Route::post('/laporan/bandongan', [Laporan::class, 'bandongan'])->name('laporan.bandongan');
+    Route::post('/laporan/kitab', [Laporan::class, 'kitab'])->name('laporan.kitab');
+    Route::post('/laporan/alquran', [Laporan::class, 'alquran'])->name('laporan.alquran');
+    Route::post('/laporan/ekstrakurikuler', [Laporan::class, 'ekstrakurikuler'])->name('laporan.ekstrakurikuler');
 });
 
 Route::get('/login', [Auth::class, 'index'])->middleware('guest')->name('login');

@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\Ekstrakurikulers;
 use App\Models\Kategoris;
+use App\Models\Kelas;
 use App\Models\Pelanggans;
 use App\Models\Profile;
 use App\Models\User;
@@ -30,5 +31,60 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Profile::factory()->create();
+
+        $kelass = [
+            [
+                'name' => 'X A',
+            ],
+            [
+                'name' => 'X B',
+            ],
+            [
+                'name' => 'X C',
+            ],
+            [
+                'name' => 'XI A',
+            ],
+            [
+                'name' => 'XI B',
+            ],
+            [
+                'name' => 'XI C',
+            ],
+            [
+                'name' => 'XII A',
+            ],
+            [
+                'name' => 'XII B',
+            ],
+            [
+                'name' => 'XII C',
+            ],
+        ];
+
+        foreach ($kelass as $kelas) {
+            Kelas::create($kelas);
+        }
+
+        $ekstrakurkulers = [
+            [
+                'name' => 'Pramuka',
+            ],
+            [
+                'name' => 'Hadroh',
+            ],
+            [
+                'name' => 'Desain',
+            ],
+            [
+                'name' => 'Futsal',
+            ],
+            [
+                'name' => 'Pubic Speaking',
+            ],
+        ];
+        foreach ($ekstrakurkulers as $ekstrakurkulur) {
+            Ekstrakurikulers::create($ekstrakurkulur);
+        }
     }
 }

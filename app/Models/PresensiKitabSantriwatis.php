@@ -16,8 +16,8 @@ class PresensiKitabSantriwatis extends Model
     {
         return $this->belongsTo(Santriwatis::class, 'id_santriwati', 'id_santriwati');
     }
-    public function kitabSantriwati()
+    public function dataKitabSantriwati()
     {
-        return $this->belongsTo(KitabSantriwatis::class, 'id_kitab_santriwati', 'id_kitab_santriwati');
+        return $this->belongsTo(DataKitabSantriwatis::class, 'id_data_kitab_santriwati', 'id_data_kitab_santriwati');
     }
 }

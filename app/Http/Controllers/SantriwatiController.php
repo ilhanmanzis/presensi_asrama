@@ -18,7 +18,7 @@ class SantriwatiController extends Controller
             'selected' => 'Santriwati',
             'page' => 'Santriwati',
             'title' => 'Data Santriwati',
-            'santriwatis' => Santriwatis::with(['kelas', 'asrama'])->paginate(10)->withQueryString(),
+            'santriwatis' => Santriwatis::with(['kelas', 'asrama'])->orderBy('nis', 'asc')->filter(request()->only(['santriwati']))->paginate(10)->withQueryString(),
         ];
 
         return view('admin/santriwati/index', $data);

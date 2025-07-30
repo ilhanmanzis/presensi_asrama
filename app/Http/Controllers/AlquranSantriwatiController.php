@@ -17,7 +17,7 @@ class AlquranSantriwatiController extends Controller
             'page' => 'Alquran Santriwati',
             'title' => 'Data Kelompok Sorogan Alquran Santriwati',
             // Assuming you have a model to fetch data
-            'alqurans' => AlquranSantriwatis::paginate(10)->withQueryString(),
+            'alqurans' => AlquranSantriwatis::orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
         ];
         return view('admin.alquran.santriwati.index', $data);
     }

@@ -51,12 +51,12 @@ class PresensiAlquranSantriwati extends Controller
     {
         $request->validate([
             'tanggal' => 'required',
-            'kegiatan' => 'required',
+            // 'kegiatan' => 'required',
         ]);
         $alquranSantriwati = AlquranSantriwatis::findOrFail($id);
         $dataAlquranSantriwati = $alquranSantriwati->dataAlquranSantriwatis()->create([
             'tanggal' => $request->tanggal,
-            'kegiatan' => $request->kegiatan,
+            'kegiatan' => $request->kegiatan ?? null,
         ]);
         foreach ($request->id_santriwati as $index => $idSantriwati) {
             $dataAlquranSantriwati->presensi()->create([
@@ -75,7 +75,7 @@ class PresensiAlquranSantriwati extends Controller
     public function show(string $id)
     {
         $dataAlquranSantriwati = AlquranSantriwatis::findOrFail($id);
-        $alqurans = $dataAlquranSantriwati->dataAlquranSantriwatis()->with('presensi')->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        $alqurans = $dataAlquranSantriwati->dataAlquranSantriwatis()->tanggal(request()->only(['tanggal']))->with('presensi')->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
         $data = [
             'selected' => 'Alquran Santriwati',
             'page' => 'Alquran Santriwati',
@@ -118,13 +118,13 @@ class PresensiAlquranSantriwati extends Controller
     {
         $request->validate([
             'tanggal' => 'required',
-            'kegiatan' => 'required',
+            // 'kegiatan' => 'required',
         ]);
         $dataAlquranSantriwati = AlquranSantriwatis::findOrFail($alquranId);
         $alquran = $dataAlquranSantriwati->dataAlquranSantriwatis()->where('id_data_Alquran_santriwati', $id)->firstOrFail();
         $alquran->update([
             'tanggal' => $request->tanggal,
-            'kegiatan' => $request->kegiatan,
+            'kegiatan' => $request->kegiatan ?? null,
         ]);
 
         foreach ($alquran->presensi as $presensi) {

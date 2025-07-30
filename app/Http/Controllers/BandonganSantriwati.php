@@ -19,7 +19,7 @@ class BandonganSantriwati extends Controller
             'page' => 'Bandongan Santriwati',
             'title' => 'Data Bandongan Santriwati',
             // Assuming you have a model to fetch data
-            'bandongans' => ModelsBandonganSantriwati::with('presensi')->orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
+            'bandongans' => ModelsBandonganSantriwati::tanggal(request()->only(['tanggal']))->with('presensi')->orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
         ];
         return view('pembina.bandongan.santriwati.index', $data);
     }

@@ -17,7 +17,7 @@ class KitabSantriController extends Controller
             'page' => 'Kitab Santri',
             'title' => 'Data Kelompok Sorogan Kitab Santri',
             // Assuming you have a model to fetch data
-            'kitabs' => KitabSantris::paginate(10)->withQueryString(),
+            'kitabs' => KitabSantris::orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
         ];
         return view('admin.kitab.santri.index', $data);
     }

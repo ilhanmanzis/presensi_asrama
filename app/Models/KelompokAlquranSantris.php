@@ -11,4 +11,8 @@ class KelompokAlquranSantris extends Model
     protected $table = 'kelompok_alquran_santris';
     protected $primaryKey = 'id';
     protected $guarded = [];
+    public function santri()
+    {
+        return $this->belongsTo(Santris::class, 'id_santri', 'id_santri');
+    }
 }

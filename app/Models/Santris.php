@@ -35,5 +35,14 @@ class Santris extends Model
         return $this->belongsToMany(KitabSantris::class, 'kelompok_kitab_santris', 'id_santri', 'id_kitab_santri');
     }
 
-    
+    public function scopeFilter($query, $filters)
+    {
+
+        if (isset($filters['santri']) && $filters['santri']) {
+            $query->where(function ($subQ) use ($filters) {
+                $subQ->where('name', 'like', '%' . $filters['santri'] . '%')
+                    ->orWhere('nis', 'like', '%' . $filters['santri'] . '%');
+            });
+        }
+    }
 }

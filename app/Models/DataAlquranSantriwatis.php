@@ -19,4 +19,13 @@ class DataAlquranSantriwatis extends Model
     {
         return $this->belongsTo(AlquranSantriwatis::class, 'id_alquran_santriwati', 'id_alquran_santriwati');
     }
+    public function scopeTanggal($query, $filters)
+    {
+
+        if (isset($filters['tanggal']) && $filters['tanggal']) {
+            $query->where('tanggal', $filters['tanggal']);
+        }
+
+        return $query;
+    }
 }

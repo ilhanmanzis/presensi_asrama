@@ -20,4 +20,8 @@ class PresensiAlquranSantriwatis extends Model
     {
         return $this->belongsTo(AlquranSantriwatis::class, 'id_alquran_santriwati', 'id_alquran_santriwati');
     }
+    public function dataAlquranSantriwati()
+    {
+        return $this->belongsTo(DataAlquranSantriwatis::class, 'id_data_alquran_santriwati', 'id_data_alquran_santriwati');
+    }
 }

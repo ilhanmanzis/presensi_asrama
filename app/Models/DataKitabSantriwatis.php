@@ -20,4 +20,13 @@ class DataKitabSantriwatis extends Model
     {
         return $this->belongsTo(KitabSantriwatis::class, 'id_kitab_santriwati', 'id_kitab_santriwati');
     }
+    public function scopeTanggal($query, $filters)
+    {
+
+        if (isset($filters['tanggal']) && $filters['tanggal']) {
+            $query->where('tanggal', $filters['tanggal']);
+        }
+
+        return $query;
+    }
 }

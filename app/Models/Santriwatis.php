@@ -32,4 +32,15 @@ class Santriwatis extends Model
     {
         return $this->belongsToMany(KitabSantriwatis::class, 'kelompok_kitab_santriwatis', 'id_santriwati', 'id_kitab_santriwati');
     }
+
+    public function scopeFilter($query, $filters)
+    {
+
+        if (isset($filters['santriwati']) && $filters['santriwati']) {
+            $query->where(function ($subQ) use ($filters) {
+                $subQ->where('name', 'like', '%' . $filters['santriwati'] . '%')
+                    ->orWhere('nis', 'like', '%' . $filters['santriwati'] . '%');
+            });
+        }
+    }
 }

@@ -19,7 +19,7 @@ class ManajemenUser extends Controller
         $data = [
             'selected' =>  'Manajemen User',
             'page' => 'Manajemen User',
-            'title' => 'Manajemen User',
+            'title' => 'Manajemen User Pembina',
             'users' => User::paginate(10)->withQueryString()
         ];
         return view('admin/manajemen/index', $data);

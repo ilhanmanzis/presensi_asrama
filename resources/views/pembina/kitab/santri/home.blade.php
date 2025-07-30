@@ -7,6 +7,7 @@
         <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
 
             <div x-data="{ pageName: `{{ $title }}` }">
+                <h2 class="mb-5 text-2xl font-bold text-gray-800 dark:text-white/90" x-text="pageName"></h2>
                 <!-- Metric Group One -->
                 <div class="grid lg:grid-cols-4 gap-4 md:grid-cols-4 sm:grid-cols-4 md:gap-4">
                     <!-- Metric Item Start -->

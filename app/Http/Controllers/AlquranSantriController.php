@@ -18,7 +18,7 @@ class AlquranSantriController extends Controller
             'page' => 'Alquran Santri',
             'title' => 'Data Kelompok Sorogan Alquran Santri',
             // Assuming you have a model to fetch data
-            'alqurans' => AlquranSantris::paginate(10)->withQueryString(),
+            'alqurans' => AlquranSantris::orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
         ];
         return view('admin.alquran.santri.index', $data);
     }

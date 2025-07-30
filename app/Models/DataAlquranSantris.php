@@ -21,4 +21,13 @@ class DataAlquranSantris extends Model
     {
         return $this->belongsTo(AlquranSantris::class, 'id_alquran_santri', 'id_alquran_santri');
     }
+    public function scopeTanggal($query, $filters)
+    {
+
+        if (isset($filters['tanggal']) && $filters['tanggal']) {
+            $query->where('tanggal', $filters['tanggal']);
+        }
+
+        return $query;
+    }
 }

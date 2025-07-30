@@ -18,4 +18,13 @@ class JamaahSantris extends Model
     {
         return $this->hasMany(PresensiJamaahSantris::class, 'id_jamaah_santri', 'id_jamaah_santri');
     }
+    public function scopeTanggal($query, $filters)
+    {
+
+        if (isset($filters['tanggal']) && $filters['tanggal']) {
+            $query->where('tanggal', $filters['tanggal']);
+        }
+
+        return $query;
+    }
 }

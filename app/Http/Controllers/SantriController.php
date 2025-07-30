@@ -18,7 +18,7 @@ class SantriController extends Controller
             'selected' => 'Santri',
             'page' => 'Santri',
             'title' => 'Data Santri',
-            'santris' => Santris::with(['asrama', 'kelas'])->paginate(10)->withQueryString(),
+            'santris' => Santris::with(['asrama', 'kelas'])->orderBy('nis', 'asc')->filter(request()->only(['santri']))->paginate(10)->withQueryString(),
         ];
 
         return view('admin/santri/index', $data);

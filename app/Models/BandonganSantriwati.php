@@ -16,4 +16,13 @@ class BandonganSantriwati extends Model
     {
         return $this->hasMany(PresensiBandonganSantriwati::class, 'id_bandongan_santriwati', 'id_bandongan_santriwati');
     }
+    public function scopeTanggal($query, $filters)
+    {
+
+        if (isset($filters['tanggal']) && $filters['tanggal']) {
+            $query->where('tanggal', $filters['tanggal']);
+        }
+
+        return $query;
+    }
 }
