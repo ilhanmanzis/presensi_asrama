@@ -112,7 +112,7 @@ npm run build
 
 ## 📁 Contoh File Import Excel
 
-👉 [**Lihat folder `contoh_import_excel`**](./contoh_import_excel)
+👉 [**Lihat folder `contoh_import_excel`**](./contoh_data_excel)
 
 ## Noted
 
