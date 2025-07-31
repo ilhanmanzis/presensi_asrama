@@ -110,8 +110,10 @@ npm run build
 -   username : admin
 -   password : admin
 
+## 📁 Contoh File Import Excel
+
+👉 [**Lihat folder `contoh_import_excel`**](./contoh_import_excel)
+
 ## Noted
 
 jika terjadi eror saat "composer install", hapus file <strong>composer.lock</strong>
-
-
