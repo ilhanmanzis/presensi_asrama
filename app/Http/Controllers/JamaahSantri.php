@@ -19,7 +19,7 @@ class JamaahSantri extends Controller
             'page' => 'Jamaah Santri',
             'title' => 'Data Jamaah Santri',
             // Assuming you have a model to fetch data
-            'jamaahs' => JamaahSantris::tanggal(request()->only(['tanggal']))->with('presensiJamaahSantris')->orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
+            'jamaahs' => JamaahSantris::tanggal(request()->only(['tanggal', 'waktu']))->with('presensiJamaahSantris')->orderBy('created_at', 'desc')->paginate(10)->withQueryString(),
         ];
         return view('pembina.jamaah.santri.index', $data);
     }

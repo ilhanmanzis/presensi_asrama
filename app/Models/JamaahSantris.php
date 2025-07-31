@@ -24,6 +24,9 @@ class JamaahSantris extends Model
         if (isset($filters['tanggal']) && $filters['tanggal']) {
             $query->where('tanggal', $filters['tanggal']);
         }
+        if (isset($filters['waktu']) && $filters['waktu']) {
+            $query->where('waktu', $filters['waktu']);
+        }
 
         return $query;
     }

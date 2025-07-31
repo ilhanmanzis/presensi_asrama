@@ -39,14 +39,68 @@
             <div class="space-y-5 sm:space-y-6">
                 <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
                     <div class="px-5 py-4 sm:px-6 sm:py-5">
-                        <div class="flex items-center justify-between gap-5">
+                        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
                             <a href="{{ route('pembina.santri-jamaah.create') }}"
-                                class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 mb-5">
+                                class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
                                 Tambah Data
                             </a>
                             <form action="{{ route('pembina.santri-jamaah') }}" method="get">
                                 <div class="flex justify-between mb-2">
 
+                                    <div class="mr-2">
+                                        <label
+                                            class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                                            Waktu
+                                        </label>
+                                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                                            <select name="waktu"
+                                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-8 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-1 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
+                                                :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                                @change="isOptionSelected = true">
+                                                <option value=""
+                                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+                                                    All
+                                                </option>
+                                                <option value="subuh"
+                                                    {{ request('waktu') == 'subuh' ? 'selected' : '' }}
+                                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400 ">
+                                                    Subuh
+                                                </option>
+                                                <option value="dzuhur"
+                                                    {{ request('waktu') == 'dzuhur' ? 'selected' : '' }}
+                                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400 ">
+                                                    Dzuhur
+                                                </option>
+                                                <option value="ashar"
+                                                    {{ request('waktu') == 'ashar' ? 'selected' : '' }}
+                                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400 ">
+                                                    Ashar
+                                                </option>
+                                                <option value="maghrib"
+                                                    {{ request('waktu') == 'maghrib' ? 'selected' : '' }}
+                                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400 ">
+                                                    Maghrib
+                                                </option>
+                                                <option value="isya"
+                                                    {{ request('waktu') == 'isya' ? 'selected' : '' }}
+                                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400 ">
+                                                    Isya
+                                                </option>
+
+
+                                            </select>
+                                            <span
+                                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                                <svg class="stroke-current" width="20" height="20"
+                                                    viewBox="0 0 20 20" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396"
+                                                        stroke="" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div>
                                         <label
                                             class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
@@ -198,7 +252,8 @@
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="size-6">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
                                                                         d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                                                 </svg>
 
