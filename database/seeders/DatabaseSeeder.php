@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Asramas;
 use App\Models\Ekstrakurikulers;
 use App\Models\Kategoris;
 use App\Models\Kelas;
@@ -43,23 +44,21 @@ class DatabaseSeeder extends Seeder
                 'name' => 'X C',
             ],
             [
-                'name' => 'XI A',
+                'name' => 'XI MIPA',
             ],
             [
-                'name' => 'XI B',
+                'name' => 'XI IPS',
             ],
             [
-                'name' => 'XI C',
+                'name' => 'XII MIPA',
             ],
             [
-                'name' => 'XII A',
+                'name' => 'XII IPS 1',
             ],
             [
-                'name' => 'XII B',
+                'name' => 'XII IPS 2',
             ],
-            [
-                'name' => 'XII C',
-            ],
+
         ];
 
         foreach ($kelass as $kelas) {
@@ -85,6 +84,23 @@ class DatabaseSeeder extends Seeder
         ];
         foreach ($ekstrakurkulers as $ekstrakurkulur) {
             Ekstrakurikulers::create($ekstrakurkulur);
+        }
+
+        $asramas = [
+            [
+                'name' => 'Asrama Pelajar Putra'
+            ],
+            [
+                'name' => 'Asrama Putri Komplek E'
+            ],
+            [
+                'name' => 'Pondok Pesantren Nurul Ummah'
+            ],
+
+        ];
+
+        foreach ($asramas as $asrama) {
+            Asramas::create($asrama);
         }
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\BandonganSantri;
 use App\Http\Controllers\BandonganSantriwati;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\EkstrakurikulerController;
+use App\Http\Controllers\Import;
 use App\Http\Controllers\JamaahSantri;
 use App\Http\Controllers\JamaahSantriwati;
 use App\Http\Controllers\KelasController;
@@ -134,6 +135,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
     Route::get('/ekstrakurikulers/{id}', [EkstrakurikulerController::class, 'show'])->name('ekstrakurikuler.show');
     Route::put('/ekstrakurikulers/update/{id}', [EkstrakurikulerController::class, 'update'])->name('ekstrakurikuler.update');
     Route::delete('/ekstrakurikulers/store/{id}', [EkstrakurikulerController::class, 'destroy'])->name('ekstrakurikuler.delete');
+
+    // import
+    Route::get('/import', [Import::class, 'index'])->name('import');
+    Route::post('/import', [Import::class, 'store'])->name('import.store');
 });
 
 //pembina
