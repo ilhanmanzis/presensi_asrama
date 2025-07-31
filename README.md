@@ -1,3 +1,38 @@
+# 🕌 Sistem Presensi Asrama MA Nurul Ummah
+
+Aplikasi berbasis web untuk mengelola dan mencatat kehadiran santri di lingkungan asrama **MA Nurul Ummah**. Sistem ini mendukung dua jenis pengguna: **Admin** dan **Pembina**, dengan fitur yang disesuaikan untuk mendukung kebutuhan pengelolaan presensi harian hingga kegiatan pembelajaran agama.
+
+---
+
+## ✨ Fitur Utama
+
+### 👤 Admin
+
+-   Manajemen Data:
+    -   Asrama
+    -   Kelas
+    -   Santri & Santriwati
+    -   Kelompok Sorogan Al-Qur’an
+    -   Kelompok Sorogan Kitab
+-   Manajemen Pengguna Pembina
+-   Presensi:
+    -   Monitoring aktivitas presensi
+-   Laporan:
+    -   Export laporan ke **PDF** dan **Excel**
+    -   Import data santri & santriwati dari file **Excel**
+-   Pengaturan sistem (Settings)
+
+### 📋 Pembina
+
+-   Presensi:
+    -   **Presensi Jamaah** (sholat wajib)
+    -   **Kajian Bandongan**
+    -   **Kelompok Sorogan Al-Qur’an**
+    -   **Kelompok Sorogan Kitab**
+    -   **Ekstrakurikuler**
+
+---
+
 ## ⚙️ Cara Install & Menjalankan Aplikasi
 
 ### 1. Clone Repository
@@ -74,3 +109,9 @@ npm run build
 
 -   username : admin
 -   password : admin
+
+## Noted
+
+jika terjadi eror saat "composer install", hapus file <strong>composer.lock</strong>
+
+
