@@ -7,8 +7,10 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class JamaahExport implements FromView, WithStyles
+
+class JamaahExport implements FromView, WithStyles, WithTitle
 {
     protected $data;
     protected $filters;
@@ -24,6 +26,11 @@ class JamaahExport implements FromView, WithStyles
     /**
      * @return \Illuminate\Support\Collection
      */
+    public function title(): string
+    {
+        return ucfirst($this->filters['waktu'] ?? 'Jamaah');
+    }
+
 
     public function styles(Worksheet $sheet)
     {

@@ -6,6 +6,7 @@ use App\Exports\AlquranExport;
 use App\Exports\BandonganExport;
 use App\Exports\Diterima;
 use App\Exports\EkstrakurikulerExport;
+use App\Exports\JamaahAllExport;
 use App\Exports\JamaahExport;
 use App\Exports\KitabExport;
 use App\Exports\Margin;
@@ -87,7 +88,7 @@ class Laporan extends Controller
 
     public function jamaah(Request $request, Jamaah $jamaah)
     {
-        // dd($request->all());
+
         $request->validate([
             'mulai' => 'required',
             'selesai' => 'required',
@@ -104,8 +105,50 @@ class Laporan extends Controller
         $action = $request->input('export');
         $mulai = $request->mulai;
         $selesai = $request->selesai;
+        $allWaktu = ['subuh', 'dzuhur', 'ashar', 'maghrib', 'isya'];
+
+
+
 
         if ($siswa === 'santri') {
+
+            if ($request->waktu === 'all') {
+                $data = [];
+                foreach ($allWaktu as $waktu) {
+                    $filters = [
+                        'tanggal_mulai' => $mulai,
+                        'tanggal_selesai' => $selesai,
+                        $siswa => $siswa, // santri atau santriwati
+                        'waktu' => $waktu
+                    ];
+                    $result = $siswa === 'santri'
+                        ? $jamaah->generateJamaahSantri($filters)
+                        : $jamaah->generateJamaahSantriwati($filters);
+
+                    $data[$waktu] = $result;
+                }
+
+                $filters = [
+                    'tanggal_mulai' => $mulai,
+                    'tanggal_selesai' => $selesai,
+                    'santri' => $siswa,
+                    'waktu' => 'all'
+                ];
+
+                if ($action === 'pdf') {
+                    $pdf = Pdf::loadView(
+                        'laporan/jamaah/jamaah-santri-semua',
+                        compact('data', 'filters')
+                    );
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream('laporan presensi jamaah santri semua waktu ' . $mulai . '-' . $selesai . '.pdf');
+                } else {
+                    return Excel::download(
+                        new JamaahAllExport($data, $filters, $siswa),
+                        'laporan presensi jamaah santri semua waktu ' . $mulai . '-' . $selesai . '.xlsx'
+                    );
+                }
+            }
             $filters = [
                 'tanggal_mulai' => $mulai,
                 'tanggal_selesai' => $selesai,
@@ -124,6 +167,43 @@ class Laporan extends Controller
                 );
             }
         } else {
+            if ($request->waktu === 'all') {
+                $data = [];
+                foreach ($allWaktu as $waktu) {
+                    $filters = [
+                        'tanggal_mulai' => $mulai,
+                        'tanggal_selesai' => $selesai,
+                        $siswa => $siswa, // santri atau santriwati
+                        'waktu' => $waktu
+                    ];
+                    $result = $jamaah->generateJamaahSantriwati($filters);
+
+                    $data[$waktu] = $result;
+                }
+
+                $filters = [
+                    'tanggal_mulai' => $mulai,
+                    'tanggal_selesai' => $selesai,
+                    'santriwati' => $siswa,
+                    'waktu' => 'all'
+                ];
+                // dd($data);
+
+
+                if ($action === 'pdf') {
+                    $pdf = Pdf::loadView(
+                        'laporan/jamaah/jamaah-santriwati-semua',
+                        compact('data', 'filters')
+                    );
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream('laporan presensi jamaah santriwati semua waktu ' . $mulai . '-' . $selesai . '.pdf');
+                } else {
+                    return Excel::download(
+                        new JamaahAllExport($data, $filters, $siswa),
+                        'laporan presensi jamaah santriwati semua waktu ' . $mulai . '-' . $selesai . '.xlsx'
+                    );
+                }
+            }
             $filters = [
                 'tanggal_mulai' => $request->mulai,
                 'tanggal_selesai' => $request->selesai,
