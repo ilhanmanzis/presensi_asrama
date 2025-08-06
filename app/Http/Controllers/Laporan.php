@@ -265,6 +265,7 @@ class Laporan extends Controller
                 'santriwati' => $siswa,
             ];
             $data = $bandongan->generateBandonganSantriwati($filters);
+            // dd($data);
             if ($action === 'pdf') {
                 $pdf = Pdf::loadView('laporan/bandongan/bandongan-santriwati', compact('data', 'filters'));
                 $pdf->setPaper('A4', 'landscape');

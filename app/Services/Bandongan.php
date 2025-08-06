@@ -53,39 +53,45 @@ class Bandongan
                 'alpha' => 0
             ];
 
-
             if (!empty($dates)) {
                 foreach ($dates as $date) {
                     $dateStr = $date->format('Y-m-d');
-                    $status = 'alpha'; // Default Alpha
+                    $statuses = []; // default: tidak ada presensi
+                    $presensis = $presensiData[$santri->id_santri][$dateStr] ?? collect();
 
-                    if (isset($presensiData[$santri->id_santri][$dateStr])) {
-                        $presensi = $presensiData[$santri->id_santri][$dateStr]->first();
+                    foreach ($presensis as $presensi) {
                         $status = $presensi->status;
+                        $statuses[] = $status;
+
+                        switch ($status) {
+                            case 'hadir':
+                                $santriData['hadir']++;
+                                break;
+                            case 'sakit':
+                                $santriData['sakit']++;
+                                break;
+                            case 'izin':
+                                $santriData['izin']++;
+                                break;
+                            case 'alpha':
+                                $santriData['alpha']++;
+                                break;
+                        }
                     }
 
-                    $santriData['presensi'][$dateStr] = $status;
-
-                    // Count status
-                    switch ($status) {
-                        case 'hadir':
-                            $santriData['hadir']++;
-                            break;
-                        case 'sakit':
-                            $santriData['sakit']++;
-                            break;
-                        case 'izin':
-                            $santriData['izin']++;
-                            break;
-                        case 'alpha':
-                            $santriData['alpha']++;
-                            break;
+                    // Jika kosong, dianggap alpha
+                    if (count($statuses) === 0) {
+                        $santriData['presensi'][$dateStr] = ['alpha'];
+                        $santriData['alpha']++;
+                    } else {
+                        $santriData['presensi'][$dateStr] = $statuses;
                     }
                 }
 
                 $result[] = $santriData;
             }
         }
+
 
         // dd($dates);
         return [
@@ -140,39 +146,45 @@ class Bandongan
                 'alpha' => 0
             ];
 
-
             if (!empty($dates)) {
                 foreach ($dates as $date) {
                     $dateStr = $date->format('Y-m-d');
-                    $status = 'alpha'; // Default Alpha
+                    $statuses = []; // default: tidak ada presensi
+                    $presensis = $presensiData[$santriwati->id_santriwati][$dateStr] ?? collect();
 
-                    if (isset($presensiData[$santriwati->id_santriwati][$dateStr])) {
-                        $presensi = $presensiData[$santriwati->id_santriwati][$dateStr]->first();
+                    foreach ($presensis as $presensi) {
                         $status = $presensi->status;
+                        $statuses[] = $status;
+
+                        switch ($status) {
+                            case 'hadir':
+                                $santriwatiData['hadir']++;
+                                break;
+                            case 'sakit':
+                                $santriwatiData['sakit']++;
+                                break;
+                            case 'izin':
+                                $santriwatiData['izin']++;
+                                break;
+                            case 'alpha':
+                                $santriwatiData['alpha']++;
+                                break;
+                        }
                     }
 
-                    $santriwatiData['presensi'][$dateStr] = $status;
-
-                    // Count status
-                    switch ($status) {
-                        case 'hadir':
-                            $santriwatiData['hadir']++;
-                            break;
-                        case 'sakit':
-                            $santriwatiData['sakit']++;
-                            break;
-                        case 'izin':
-                            $santriwatiData['izin']++;
-                            break;
-                        case 'alpha':
-                            $santriwatiData['alpha']++;
-                            break;
+                    // Jika kosong, dianggap alpha
+                    if (count($statuses) === 0) {
+                        $santriwatiData['presensi'][$dateStr] = ['alpha'];
+                        $santriwatiData['alpha']++;
+                    } else {
+                        $santriwatiData['presensi'][$dateStr] = $statuses;
                     }
                 }
 
                 $result[] = $santriwatiData;
             }
         }
+
 
         // dd($dates);
         return [

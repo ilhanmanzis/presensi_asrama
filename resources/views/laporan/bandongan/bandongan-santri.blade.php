@@ -47,177 +47,75 @@
 
         .nama-col {
             text-align: left;
-            min-width: 120px;
-        }
-
-        .vertical-text {
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            width: 20px;
-            font-size: 9px;
-        }
-
-        .legend {
-            margin-top: 10px;
-            font-size: 10px;
-        }
-
-        .total-col {
-            font-size: 9px;
-            line-height: 1.3;
-        }
-
-        .total-col div {
-            margin: 1px 0;
-        }
-
-        @media print {
-            body {
-                margin: 10px;
-            }
-
-            table {
-                font-size: 9px;
-            }
-
-            th,
-            td {
-                padding: 2px;
-            }
         }
     </style>
 </head>
 
 <body>
-    @if (empty($data['dates']) || count($data['dates']) === 0)
-        <div class="header">
-            <h2>Laporan Presensi Bandongan Santri</h2>
-            <h2>MA Nurul Ummah</h2>
-            <p>Periode: {{ $data['periode'] ?? '-' }}</p>
-            <h3>Data tidak ada</h3>
-        </div>
-    @else
-        <div class="header">
-            <h2>Laporan Presensi Bandongan Santri</h2>
-            <h2>MA Nurul Ummah</h2>
-            <p>Periode: {{ $data['periode'] }}</p>
-        </div>
+    <div class="header">
+        <h2>Laporan Presensi Bandongan Santri</h2>
+        <h2>MA Nurul Ummah</h2>
+        <p>Periode: {{ $data['periode'] ?? '-' }}</p>
+    </div>
 
-        <table>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>NIS</th>
+                <th>Nama</th>
+                <th>Hadir</th>
+                <th>Sakit</th>
+                <th>Izin</th>
+                <th>Alpha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($data['santris'] as $index => $santri)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $santri['nis'] }}</td>
+                    <td class="nama-col">{{ $santri['nama'] }}</td>
+                    <td>{{ $santri['hadir'] }}</td>
+                    <td>{{ $santri['sakit'] }}</td>
+                    <td>{{ $santri['izin'] }}</td>
+                    <td>{{ $santri['alpha'] }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7">Tidak ada data presensi.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    <div style="margin-top: 20px;">
+        <table style="width: 300px;">
             <thead>
                 <tr>
-                    <th rowspan="3">No</th>
-                    <th rowspan="3">Nis</th>
-                    <th rowspan="3">Nama</th>
-                    <th colspan="{{ count($data['dates']) }}">
-                        {{ \Carbon\Carbon::parse($data['dates'][0])->format('Y') }}
-                    </th>
-                    <th rowspan="2" colspan="4">Jumlah</th>
-
+                    <th colspan="4">Total Seluruh Santri</th>
                 </tr>
                 <tr>
-                    @php
-                        $monthCounts = [];
-                        foreach ($data['dates'] as $date) {
-                            $month = $date->format('F');
-                            if (!isset($monthCounts[$month])) {
-                                $monthCounts[$month] = 0;
-                            }
-                            $monthCounts[$month]++;
-                        }
-                    @endphp
-
-                    @foreach ($monthCounts as $month => $count)
-                        <th colspan="{{ $count }}">{{ $month }}</th>
-                    @endforeach
-
-                </tr>
-                <tr>
-                    @foreach ($data['dates'] as $date)
-                        <th>{{ $date->format('j') }}</th>
-                    @endforeach
-                    <th>H</th>
-                    <th>S</th>
-                    <th>I</th>
-                    <th>A</th>
+                    <th>Hadir</th>
+                    <th>Sakit</th>
+                    <th>Izin</th>
+                    <th>Alpha</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($data['santris'] as $index => $santri)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $santri['nis'] }}</td>
-                        <td class="nama-col">{{ $santri['nama'] }}</td>
-                        @php
-                            $mapStatus = [
-                                'hadir' => 'H',
-                                'sakit' => 'S',
-                                'izin' => 'I',
-                                'alpha' => 'A',
-                            ];
-                        @endphp
-
-                        @foreach ($data['dates'] as $date)
-                            @php
-                                $formattedDate = $date->format('Y-m-d');
-                                $status = $santri['presensi'][$formattedDate] ?? 'alpha';
-                            @endphp
-                            <td>{{ $mapStatus[$status] ?? 'A' }}</td>
-                        @endforeach
-                        <td class="total-col">
-                            <div>{{ $santri['hadir'] }}</div>
-                        </td>
-                        <td>
-                            <div>{{ $santri['sakit'] }}</div>
-                        </td>
-                        <td>
-
-                            <div>{{ $santri['izin'] }}</div>
-                        </td>
-                        <td>
-                            <div>{{ $santri['alpha'] }}</div>
-
-                        </td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td>{{ $data['total_hadir'] }}</td>
+                    <td>{{ $data['total_sakit'] }}</td>
+                    <td>{{ $data['total_izin'] }}</td>
+                    <td>{{ $data['total_alpha'] }}</td>
+                </tr>
             </tbody>
         </table>
+    </div>
 
-        <div style="margin-top: 20px;">
-            <table style="width: 300px;">
-                <thead>
-                    <tr>
-                        <th colspan="4">Total</th>
-                    </tr>
-                    <tr>
-                        <th>Hadir</th>
-                        <th>Sakit</th>
-                        <th>Izin</th>
-                        <th>Alpha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $data['total_hadir'] }}</td>
-                        <td>{{ $data['total_sakit'] }}</td>
-                        <td>{{ $data['total_izin'] }}</td>
-                        <td>{{ $data['total_alpha'] }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="legend">
-            <strong>Keterangan:</strong>
-            H = Hadir, S = Sakit, I = Izin, A = Alpha
-        </div>
-
-        <script>
-            window.onload = function() {
-                window.print();
-            }
-        </script>
-    @endif
+    <div style="margin-top: 10px; font-size: 10px;">
+        <strong>Keterangan:</strong> H = Hadir, S = Sakit, I = Izin, A = Alpha
+    </div>
 </body>
 
 </html>

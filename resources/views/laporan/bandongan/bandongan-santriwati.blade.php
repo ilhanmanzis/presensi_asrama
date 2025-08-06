@@ -50,25 +50,9 @@
             min-width: 120px;
         }
 
-        .vertical-text {
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            width: 20px;
-            font-size: 9px;
-        }
-
         .legend {
             margin-top: 10px;
             font-size: 10px;
-        }
-
-        .total-col {
-            font-size: 9px;
-            line-height: 1.3;
-        }
-
-        .total-col div {
-            margin: 1px 0;
         }
 
         @media print {
@@ -89,57 +73,25 @@
 </head>
 
 <body>
-    @if (empty($data['dates']) || count($data['dates']) === 0)
-        <div class="header">
-            <h2>Laporan Presensi Bandongan Santriwati</h2>
-            <h2>MA Nurul Ummah</h2>
-            <p>Periode: {{ $data['periode'] ?? '-' }}</p>
-            <h3>Data tidak ada</h3>
-        </div>
-    @else
-        <div class="header">
-            <h2>Laporan Presensi Bandongan Santriwati</h2>
-            <h2>MA Nurul Ummah</h2>
-            <p>Periode: {{ $data['periode'] }}</p>
-        </div>
+    <div class="header">
+        <h2>Laporan Presensi Bandongan Santriwati</h2>
+        <h2>MA Nurul Ummah</h2>
+        <p>Periode: {{ $data['periode'] ?? '-' }}</p>
+    </div>
 
+    @if (empty($data['santriwatis']) || count($data['santriwatis']) === 0)
+        <p>Data tidak tersedia.</p>
+    @else
         <table>
             <thead>
                 <tr>
-                    <th rowspan="3">No</th>
-                    <th rowspan="3">Nis</th>
-                    <th rowspan="3">Nama</th>
-                    <th colspan="{{ count($data['dates']) }}">
-                        {{ \Carbon\Carbon::parse($data['dates'][0])->format('Y') }}
-                    </th>
-                    <th rowspan="2" colspan="4">Jumlah</th>
-
-                </tr>
-                <tr>
-                    @php
-                        $monthCounts = [];
-                        foreach ($data['dates'] as $date) {
-                            $month = $date->format('F');
-                            if (!isset($monthCounts[$month])) {
-                                $monthCounts[$month] = 0;
-                            }
-                            $monthCounts[$month]++;
-                        }
-                    @endphp
-
-                    @foreach ($monthCounts as $month => $count)
-                        <th colspan="{{ $count }}">{{ $month }}</th>
-                    @endforeach
-
-                </tr>
-                <tr>
-                    @foreach ($data['dates'] as $date)
-                        <th>{{ $date->format('j') }}</th>
-                    @endforeach
-                    <th>H</th>
-                    <th>S</th>
-                    <th>I</th>
-                    <th>A</th>
+                    <th>No</th>
+                    <th>NIS</th>
+                    <th>Nama</th>
+                    <th>Hadir</th>
+                    <th>Sakit</th>
+                    <th>Izin</th>
+                    <th>Alpha</th>
                 </tr>
             </thead>
             <tbody>
@@ -148,36 +100,10 @@
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $santriwati['nis'] }}</td>
                         <td class="nama-col">{{ $santriwati['nama'] }}</td>
-                        @php
-                            $mapStatus = [
-                                'hadir' => 'H',
-                                'sakit' => 'S',
-                                'izin' => 'I',
-                                'alpha' => 'A',
-                            ];
-                        @endphp
-
-                        @foreach ($data['dates'] as $date)
-                            @php
-                                $formattedDate = $date->format('Y-m-d');
-                                $status = $santriwati['presensi'][$formattedDate] ?? 'alpha';
-                            @endphp
-                            <td>{{ $mapStatus[$status] ?? 'A' }}</td>
-                        @endforeach
-                        <td class="total-col">
-                            <div>{{ $santriwati['hadir'] }}</div>
-                        </td>
-                        <td>
-                            <div>{{ $santriwati['sakit'] }}</div>
-                        </td>
-                        <td>
-
-                            <div>{{ $santriwati['izin'] }}</div>
-                        </td>
-                        <td>
-                            <div>{{ $santriwati['alpha'] }}</div>
-
-                        </td>
+                        <td>{{ $santriwati['hadir'] }}</td>
+                        <td>{{ $santriwati['sakit'] }}</td>
+                        <td>{{ $santriwati['izin'] }}</td>
+                        <td>{{ $santriwati['alpha'] }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -211,13 +137,13 @@
             <strong>Keterangan:</strong>
             H = Hadir, S = Sakit, I = Izin, A = Alpha
         </div>
-
-        <script>
-            window.onload = function() {
-                window.print();
-            }
-        </script>
     @endif
+
+    <script>
+        window.onload = function() {
+            window.print();
+        }
+    </script>
 </body>
 
 </html>
