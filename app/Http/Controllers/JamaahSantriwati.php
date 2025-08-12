@@ -128,6 +128,8 @@ class JamaahSantriwati extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $jamaah = JamaahSantriwatis::findOrFail($id);
+        $jamaah->delete();
+        return redirect()->route('pembina.santriwati-jamaah')->with('success', 'Data Jamaah Santriwati berhasil dihapus.');
     }
 }

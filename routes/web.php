@@ -153,6 +153,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santri-jamaah/{id}', [JamaahSantri::class, 'show'])->name('santri-jamaah.show');
     Route::get('/santri-jamaah/detail/{id}', [JamaahSantri::class, 'edit'])->name('santri-jamaah.detail');
     Route::put('/santri-jamaah/update/{id}', [JamaahSantri::class, 'update'])->name('santri-jamaah.update');
+    Route::delete('/santri-jamaah/delete/{id}', [JamaahSantri::class, 'destroy'])->name('santri-jamaah.delete');
 
     //jamaah santriwati
     Route::get('/santriwati-jamaah', [JamaahSantriwati::class, 'index'])->name('santriwati-jamaah');
@@ -161,6 +162,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santriwati-jamaah/{id}', [JamaahSantriwati::class, 'show'])->name('santriwati-jamaah.show');
     Route::get('/santriwati-jamaah/detail/{id}', [JamaahSantriwati::class, 'edit'])->name('santriwati-jamaah.detail');
     Route::put('/santriwati-jamaah/update/{id}', [JamaahSantriwati::class, 'update'])->name('santriwati-jamaah.update');
+    Route::delete('/santriwati-jamaah/delete/{id}', [JamaahSantriwati::class, 'destroy'])->name('santriwati-jamaah.delete');
 
     //bandongan santriwati
     Route::get('/santriwati-bandongan', [BandonganSantriwati::class, 'index'])->name('santriwati-bandongan');
@@ -169,6 +171,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santriwati-bandongan/{id}', [BandonganSantriwati::class, 'show'])->name('santriwati-bandongan.show');
     Route::get('/santriwati-bandongan/detail/{id}', [BandonganSantriwati::class, 'edit'])->name('santriwati-bandongan.detail');
     Route::put('/santriwati-bandongan/update/{id}', [BandonganSantriwati::class, 'update'])->name('santriwati-bandongan.update');
+    Route::delete('/santriwati-bandongan/delete/{id}', [BandonganSantriwati::class, 'destroy'])->name('santriwati-bandongan.delete');
 
     //bandongan santri
     Route::get('/santri-bandongan', [BandonganSantri::class, 'index'])->name('santri-bandongan');
@@ -177,6 +180,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santri-bandongan/{id}', [BandonganSantri::class, 'show'])->name('santri-bandongan.show');
     Route::get('/santri-bandongan/detail/{id}', [BandonganSantri::class, 'edit'])->name('santri-bandongan.detail');
     Route::put('/santri-bandongan/update/{id}', [BandonganSantri::class, 'update'])->name('santri-bandongan.update');
+    Route::delete('/santri-bandongan/delete/{id}', [BandonganSantri::class, 'destroy'])->name('santri-bandongan.delete');
 
     //kitab santri
     Route::get('/santri-kitab', [PresensiKitabSantri::class, 'index'])->name('santri-kitab');
@@ -186,6 +190,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santri-kitab/{kitabId}/edit/{id}', [PresensiKitabSantri::class, 'edit'])->name('santri-kitab.edit');
     Route::get('/santri-kitab/{kitabId}/detail/{id}', [PresensiKitabSantri::class, 'detail'])->name('santri-kitab.detail');
     Route::put('/santri-kitab/{kitabId}/update/{id}', [PresensiKitabSantri::class, 'update'])->name('santri-kitab.update');
+    Route::delete('/santri-kitab/{kitabId}/delete/{id}', [PresensiKitabSantri::class, 'destroy'])->name('santri-kitab.delete');
 
     //kitab santriwati
     Route::get('/santriwati-kitab', [PresensiKitabSantriwati::class, 'index'])->name('santriwati-kitab');
@@ -195,6 +200,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santriwati-kitab/{kitabId}/edit/{id}', [PresensiKitabSantriwati::class, 'edit'])->name('santriwati-kitab.edit');
     Route::get('/santriwati-kitab/{kitabId}/detail/{id}', [PresensiKitabSantriwati::class, 'detail'])->name('santriwati-kitab.detail');
     Route::put('/santriwati-kitab/{kitabId}/update/{id}', [PresensiKitabSantriwati::class, 'update'])->name('santriwati-kitab.update');
+    Route::delete('/santriwati-kitab/{kitabId}/delete/{id}', [PresensiKitabSantriwati::class, 'destroy'])->name('santriwati-kitab.delete');
 
 
     //alquran santri
@@ -205,6 +211,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santri-alquran/{alquranId}/edit/{id}', [PresensiAlquranSantri::class, 'edit'])->name('santri-alquran.edit');
     Route::get('/santri-alquran/{alquranId}/detail/{id}', [PresensiAlquranSantri::class, 'detail'])->name('santri-alquran.detail');
     Route::put('/santri-alquran/{alquranId}/update/{id}', [PresensiAlquranSantri::class, 'update'])->name('santri-alquran.update');
+    Route::delete('/santri-alquran/{alquranId}/delete/{id}', [PresensiAlquranSantri::class, 'destroy'])->name('santri-alquran.delete');
 
     //alquran santriwati
     Route::get('/santriwati-alquran', [PresensiAlquranSantriwati::class, 'index'])->name('santriwati-alquran');
@@ -214,6 +221,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/santriwati-alquran/{alquranId}/edit/{id}', [PresensiAlquranSantriwati::class, 'edit'])->name('santriwati-alquran.edit');
     Route::get('/santriwati-alquran/{alquranId}/detail/{id}', [PresensiAlquranSantriwati::class, 'detail'])->name('santriwati-alquran.detail');
     Route::put('/santriwati-alquran/{alquranId}/update/{id}', [PresensiAlquranSantriwati::class, 'update'])->name('santriwati-alquran.update');
+    Route::delete('/santriwati-alquran/{alquranId}/delete/{id}', [PresensiAlquranSantriwati::class, 'destroy'])->name('santriwati-alquran.delete');
 
     //ekstrakurikuler
     Route::get('/ekstrakurikuler', [PresensiEkstrakurikulerController::class, 'index'])->name('ekstrakurikuler');
@@ -222,6 +230,7 @@ Route::middleware(['auth', 'role:pembina'])->prefix('pembina')->as('pembina.')->
     Route::get('/ekstrakurikuler/{id}', [PresensiEkstrakurikulerController::class, 'show'])->name('ekstrakurikuler.show');
     Route::get('/ekstrakurikuler/detail/{id}', [PresensiEkstrakurikulerController::class, 'edit'])->name('ekstrakurikuler.detail');
     Route::put('/ekstrakurikuler/update/{id}', [PresensiEkstrakurikulerController::class, 'update'])->name('ekstrakurikuler.update');
+    Route::delete('/ekstrakurikuler/delete/{id}', [PresensiEkstrakurikulerController::class, 'destroy'])->name('ekstrakurikuler.delete');
 });
 
 

@@ -132,6 +132,8 @@ class BandonganSantri extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bandongan = ModelsBandonganSantri::findOrFail($id);
+        $bandongan->delete();
+        return redirect()->route('pembina.santri-bandongan')->with('success', 'Data Jandongan Santri berhasil dihapus.');
     }
 }

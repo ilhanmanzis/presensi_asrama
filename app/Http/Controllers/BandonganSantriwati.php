@@ -127,6 +127,8 @@ class BandonganSantriwati extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bandongan = ModelsBandonganSantriwati::findOrFail($id);
+        $bandongan->delete();
+        return redirect()->route('pembina.santriwati-bandongan')->with('success', 'Data Jandongan Santriwati berhasil dihapus.');
     }
 }

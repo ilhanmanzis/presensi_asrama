@@ -145,9 +145,14 @@ class PresensiAlquranSantriwati extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $alquranId, string $id)
     {
-        //
+        $dataAlquranSantriwati = AlquranSantriwatis::findOrFail($alquranId);
+        $alquran = $dataAlquranSantriwati->dataAlquranSantriwatis()->where('id_data_Alquran_santriwati', $id)->firstOrFail();
+
+        $alquran->delete();
+        return redirect()->route('pembina.santriwati-alquran.show', ['id' => $alquranId])
+            ->with('success', 'Presensi Sorogan Alquran Santriwati berhasil dihapus.');
     }
 
     public function detail(string $alquranId, string $id)

@@ -136,6 +136,8 @@ class JamaahSantri extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $jamaah = JamaahSantris::findOrFail($id);
+        $jamaah->delete();
+        return redirect()->route('pembina.santri-jamaah')->with('success', 'Data Jamaah Santri berhasil dihapus.');
     }
 }

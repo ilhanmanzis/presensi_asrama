@@ -174,6 +174,8 @@ class PresensiEkstrakurikulerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ekstrakurikuler = DataEkstrakurikulers::findOrFail($id);
+        $ekstrakurikuler->delete();
+        return redirect()->route('pembina.ekstrakurikuler')->with('success', 'Data Ekstrakurikuler  berhasil dihapus.');
     }
 }

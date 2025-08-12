@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AlquranSantris;
+use App\Models\DataAlquranSantris;
 use Illuminate\Http\Request;
 
 class PresensiAlquranSantri extends Controller
@@ -145,9 +146,14 @@ class PresensiAlquranSantri extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $alquranId, string $id)
     {
-        //
+        $dataAlquranSantri = AlquranSantris::findOrFail($alquranId);
+        $alquran = $dataAlquranSantri->dataAlquranSantris()->where('id_data_Alquran_santri', $id)->firstOrFail();
+
+        $alquran->delete();
+        return redirect()->route('pembina.santri-alquran.show', ['id' => $alquranId])
+            ->with('success', 'Presensi Sorogan Alquran Santri berhasil dihapus.');
     }
 
     public function detail(string $alquranId, string $id)

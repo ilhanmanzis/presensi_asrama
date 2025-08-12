@@ -145,9 +145,14 @@ class PresensiKitabSantri extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $kitabId, string $id)
     {
-        //
+        $dataKitabSantri = KitabSantris::findOrFail($kitabId);
+        $kitab = $dataKitabSantri->datakitabSantris()->where('id_data_kitab_santri', $id)->firstOrFail();
+
+        $kitab->delete();
+        return redirect()->route('pembina.santri-kitab.show', ['id' => $kitabId])
+            ->with('success', 'Presensi Sorogan Kitab Santri berhasil dihapus.');
     }
 
     public function detail(string $kitabId, string $id)
